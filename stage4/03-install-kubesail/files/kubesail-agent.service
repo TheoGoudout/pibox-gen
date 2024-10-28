@@ -1,0 +1,13 @@
+[Service]
+Description=KubeSail Agent
+Restart=on-failure
+RestartSec=5
+ExecStart=/opt/kubesail/kubesail-agent.sh
+
+[Unit]
+After=network-online.target
+Wants=network-online.target
+Before=sshd.service
+
+[Install]
+WantedBy=default.target

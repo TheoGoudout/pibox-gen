@@ -1,0 +1,6 @@
+# TODO: filter out packages used for build
+lvm2
+sysstat
+smartmontools
+whois
+iptables

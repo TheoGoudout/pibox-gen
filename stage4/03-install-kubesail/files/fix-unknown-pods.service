@@ -1,0 +1,12 @@
+[Unit]
+Description=Fix Unknown pods
+Requires=k3s.service
+
+[Service]
+Type=forking
+GuessMainPID=no
+StandardInput=null
+ExecStart=/opt/kubesail/fix-unknown-pods.sh
+
+[Install]
+WantedBy=default.target

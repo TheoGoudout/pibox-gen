@@ -1,0 +1,12 @@
+[Unit]
+Description=Disable Energy Efficient Ethernet (EEE) for %I interface
+Before=network-pre.target
+Wants=network-pre.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+ExecStart=/sbin/ethtool --set-eee %i eee off
+
+[Install]
+WantedBy=multi-user.target
