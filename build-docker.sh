@@ -143,6 +143,7 @@ time ${DOCKER} run \
   -v /dev:/dev \
   -v /lib/modules:/lib/modules \
   ${PIGEN_DOCKER_OPTS} \
+  --volume "${DIR}":/pi-gen/ \
   --volume "${CONFIG_FILE}":/config:ro \
   -e "GIT_HASH=${GIT_HASH}" \
   "${DOCKER_CMDLINE_POST[@]}" \
@@ -151,19 +152,12 @@ time ${DOCKER} run \
     dpkg-reconfigure qemu-user-static &&
     # binfmt_misc is sometimes not mounted with debian bullseye image
     (mount binfmt_misc -t binfmt_misc /proc/sys/fs/binfmt_misc || true) &&
-    cd /pi-gen; ./build.sh ${BUILD_OPTS} &&
-    rsync -av work/*/build.log deploy/
+    cd /pi-gen; ./build.sh ${BUILD_OPTS}
   " &
   wait "$!"
 
-# Ensure that deploy/ is always owned by calling user
-echo "copying results from deploy/"
-${DOCKER} cp "${CONTAINER_NAME}":/pi-gen/deploy - | tar -xf -
-
-echo "copying log from container ${CONTAINER_NAME} to depoy/"
-${DOCKER} logs --timestamps "${CONTAINER_NAME}" &>deploy/build-docker.log
-
-ls -lah deploy
+# Ensure that deploy/ and work/ are owned by calling user
+sudo chown $(id -nu):$(id -ng)
 
 # cleanup
 if [ "${PRESERVE_CONTAINER}" != "1" ]; then

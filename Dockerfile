@@ -10,7 +10,3 @@ RUN apt-get -y update && \
         libarchive-tools libcap2-bin rsync grep udev xz-utils curl xxd file kmod bc\
         binfmt-support ca-certificates qemu-utils kpartx fdisk gpg pigz\
     && rm -rf /var/lib/apt/lists/*
-
-COPY . /pi-gen/
-
-VOLUME [ "/pi-gen/work", "/pi-gen/deploy"]
