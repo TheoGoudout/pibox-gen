@@ -1,0 +1,45 @@
+# This is an example configuration file using the default values
+
+# Image config
+ARCH=arm64
+RELEASE=bullseye
+IMG_NAME=piboxos-$RELEASE-$ARCH
+TARGET_HOSTNAME=pibox
+
+# Build config
+#BASE_DIR=
+#WORK_DIR=$BASE_DIR/work
+#DEPLOY_DIR=$BASE_DIR/deploy
+STAGE_LIST=stage*
+USE_QEMU=0
+#APT_PROXY=
+#SETFCAP=
+
+# Experimental build config
+#USE_QCOW2=0
+#BASE_QCOW2_SIZE=12G
+
+# Image compression config
+DEPLOY_COMPRESSION=zip
+COMPRESSION_LEVEL=6
+
+# Locale config
+LOCALE_DEFAULT='en_GB.UTF-8'
+KEYBOARD_KEYMAP='gb'
+KEYBOARD_LAYOUT='English (UK)'
+TIMEZONE_DEFAULT='Europe/London'
+
+# Wifi settings
+#WPA_ESSID=
+#WPA_PASSWORD=
+#WPA_COUNTRY=
+
+# First user config
+FIRST_USER_NAME=pi
+#FIRST_USER_PASS=
+DISABLE_FIRST_BOOT_USER_RENAME=0
+
+# SSH config
+ENABLE_SSH=0
+#PUBKEY_SSH_FIRST_USER=
+PUBKEY_ONLY_SSH=0
